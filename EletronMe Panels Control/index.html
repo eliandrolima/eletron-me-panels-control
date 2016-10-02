@@ -1,0 +1,375 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset='UTF-8' />
+    <link href="themes/eletron.me.min.css" rel="stylesheet" />
+    <link href="themes/jquery.mobile.icons.min.css" rel="stylesheet" />
+    <link href="jqm/jquery.mobile.structure-1.4.5.min.css" rel="stylesheet">
+    <!-- <link href="jqm/jquery.mobile-1.4.5.min.css" rel="stylesheet"> -->
+    <link href="css/main.css" rel="stylesheet" />
+    <link href="bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <script src="jqm/jquery.min.js"></script>
+    <script src="jqm/jquery.mobile-1.4.5.min.js"></script>
+    <script src="bower_components/everlive/min/everlive.all.min.js"></script>
+    <script src="jqm/jquery.min.js"></script>
+    <script src="js/everlive_functions.js"></script>
+</head>
+<body>
+
+    <input type="hidden" id="ordem-control-app" value="0" />
+
+    <!---------------------   LOGIN   ---------------------->
+    <!---------------------   LOGIN   ---------------------->
+    <!---------------------   LOGIN   ---------------------->
+
+    <div data-role="page" id="login" data-theme="c">
+        <div data-role="header" data-position="fixed" data-theme="a">
+            <h1>Control</h1>
+        </div><!-- div data-role="header" data-position="fixed" -->
+
+        <div data-role="main" class="ui-content" style="text-align:center;">
+            <br />
+            <h3>Login</h3>
+            <input type="text" id="username" placeholder="Usuário" data-theme="d" />
+            <br />
+            <input type="password" id="password" placeholder="Senha" data-theme="d" />
+            <br />
+            <button class="ui-btn ui-btn-inline ui-corner-all ui-shadow ui-btn-a" onclick="loginIntoEletronMe(); return false;">Entrar</button>
+
+        </div><!-- div data-role="main" class="ui-content" -->
+
+    </div><!-- div data-role="page" id="login"  data-theme="c" -->
+
+    <!----------------   MENSAGENS (HOME)   ---------------->
+    <!----------------   MENSAGENS (HOME)   ---------------->
+    <!----------------   MENSAGENS (HOME)   ---------------->
+    <div data-role="page" id="home" data-theme="c">
+        <div data-role="header" data-position="fixed" data-theme="a">
+            <a id="start-button" href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-power ui-btn-icon-notext" onclick="startEvent(); return false;">Msgs</a>
+            <h1>Mensagens</h1>
+            <a href="#login" class="ui-btn ui-corner-all ui-shadow ui-icon-arrow-r ui-btn-icon-notext ui-btn-b">Msgs</a>
+        </div><!-- div data-role="header" data-position="fixed" -->
+        
+        <div data-role="main" class="ui-content" style="text-align:center;">
+        
+            <span style="color:#ff00ff;">Pessoas online: </span><span name="torcedores-online">0</span>
+            <hr />
+   
+            <h3>Postar Mensagens</h3>
+            <div id="alerta-mensagem-enviada" style="position: fixed; left: 20px; top: 45%;">Mensagem enviada.</div>
+            <textarea name="addmsg" id="addmsg" placeholder="Digite aqui a mensagem a ser postada..." data-theme="d"></textarea>
+            <br />
+            <button class="ui-btn ui-btn-inline ui-corner-all ui-shadow" style="background-color:green;" onclick="pubMsg(); return false;">Postar</button>
+            
+        </div><!-- div data-role="main" class="ui-content" -->
+
+            <div data-role="footer" style="text-align:center;" data-position="fixed" data-theme="a">
+                <div data-role="controlgroup" data-type="horizontal" data-theme="b">
+                    <a href="#home" class="ui-btn ui-corner-all ui-shadow ui-icon-comment ui-btn-icon-notext ui-btn-active" onclick="stopShowColor();">home</a>
+                    <a href="#marquee" class="ui-btn ui-corner-all ui-shadow ui-icon-info ui-btn-icon-notext" onclick="stopShowColor();">marquee</a>
+                    <a href="#propagandas" class="ui-btn ui-corner-all ui-shadow ui-icon-action ui-btn-icon-notext" onclick="stopShowColor();">ads</a>
+                    <a href="#photos" class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-notext">photo</a>
+                    <a href="#colors" class="ui-btn ui-corner-all ui-shadow ui-icon-grid ui-btn-icon-notext">colors</a>
+                </div><!-- div data-role="controlgroup" data-type="horizontal" -->
+            </div><!-- div data-role="footer" style="text-align:center;" data-position="fixed" -->
+        </div><!-- div data-role="page" id="home" -->
+
+    <!------------------   MAIN PANEL   -------------------->
+    <!------------------   MAIN PANEL   -------------------->
+    <!------------------   MAIN PANEL   -------------------->
+
+    <div data-role="page" id="painel" data-theme="c">
+        <div data-role="header" data-position="fixed" data-theme="a">
+            <a href="#home" class="ui-btn ui-corner-all ui-shadow ui-icon-arrow-l ui-btn-icon-notext">Home</a>
+            <h1>Painel</h1>
+        </div><!-- div data-role="header" data-position="fixed" -->
+
+        <div data-role="main" class="ui-content" style="text-align:center;">
+            <span>Pessoas online: </span><span name="torcedores-online">0</span>
+            
+        </div><!-- div data-role="main" class="ui-content" -->
+
+       
+    </div><!-- div data-role="page" id="painel" -->
+
+    <!--------------------   MARQUEE   --------------------->
+    <!--------------------   MARQUEE   --------------------->
+    <!--------------------   MARQUEE   --------------------->
+
+    <div data-role="page" id="marquee" data-theme="c">
+        <div data-role="header" data-position="fixed" data-theme="a">
+            <h1>Letreiro</h1>
+        </div><!-- div data-role="header" data-position="fixed" -->
+
+        <div data-role="main" class="ui-content" style="text-align:center;">
+            <span style="color:#ff00ff;">Pessoas online: </span><span name="torcedores-online">0</span>
+            <hr>
+            <br>
+            <h3>Alterar Letreiro</h3>
+            <br>
+            <textarea name="marquee-msg" id="marquee-msg" placeholder="Digite aqui a nova mensagem do letreiro..." data-theme="d"></textarea>
+            <br />
+            <button class="ui-btn ui-btn-inline ui-corner-all ui-shadow" style="background-color:green; color:white;" onclick="mudarLetreiro(); return false;">Alterar</button>
+        </div><!-- div data-role="main" class="ui-content" -->
+
+        <div data-role="footer" style="text-align:center;" data-position="fixed" data-theme="a">
+            <div data-role="controlgroup" data-type="horizontal" data-theme="b">
+                <a href="#home" class="ui-btn ui-corner-all ui-shadow ui-icon-comment ui-btn-icon-notext" onclick="stopShowColor();">home</a>
+                <a href="#marquee" class="ui-btn ui-corner-all ui-shadow ui-icon-info ui-btn-icon-notext ui-btn-active" onclick="stopShowColor();">marquee</a>
+                <a href="#propagandas" class="ui-btn ui-corner-all ui-shadow ui-icon-action ui-btn-icon-notext" onclick="stopShowColor();">ads</a>
+                <a href="#photos" class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-notext">photo</a>    
+                <a href="#colors" class="ui-btn ui-corner-all ui-shadow ui-icon-grid ui-btn-icon-notext">colors</a>
+            </div><!-- div data-role="controlgroup" data-type="horizontal" -->
+        </div><!-- div data-role="footer" style="text-align:center;" data-position="fixed" -->
+    </div><!-- div data-role="page" id="marquee" -->
+
+    <!---------------------   PHOTOS   --------------------->
+    <!---------------------   PHOTOS   --------------------->
+    <!---------------------   PHOTOS   --------------------->
+
+    <div data-role="page" id="photos" data-theme="c">
+        <div data-role="header" data-position="fixed" data-theme="a">
+            <h1>Fotos</h1>
+        </div><!-- div data-role="header" data-position="fixed" -->
+
+        <div data-role="main" class="ui-content" style="text-align:center;">
+            <span style="color:#ff00ff;">Pessoas online: </span><span name="torcedores-online">0</span>
+            <hr>
+            <h2>Postar Foto</h2>
+            <img id="picture-default-conteiner" src="img/picture-default.png" />
+            <br><br />
+            <span id="camera-button" style="font-size:1.8em;" onclick="getPicture();"><i class="fa fa-camera"></i></span>
+            
+        </div><!-- div data-role="main" class="ui-content" -->
+
+        <div data-role="footer" style="text-align:center;" data-position="fixed" data-theme="a">
+            <div data-role="controlgroup" data-type="horizontal" data-theme="b">
+                <a href="#home" class="ui-btn ui-corner-all ui-shadow ui-icon-comment ui-btn-icon-notext" onclick="stopShowColor();">home</a>
+                <a href="#marquee" class="ui-btn ui-corner-all ui-shadow ui-icon-info ui-btn-icon-notext" onclick="stopShowColor();">marquee</a>
+                <a href="#propagandas" class="ui-btn ui-corner-all ui-shadow ui-icon-action ui-btn-icon-notext" onclick="stopShowColor();">ads</a>
+                <a href="#photos" class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-notext ui-btn-active">photo</a>
+                <a href="#colors" class="ui-btn ui-corner-all ui-shadow ui-icon-grid ui-btn-icon-notext">colors</a>
+            </div><!-- div data-role="controlgroup" data-type="horizontal" -->
+        </div><!-- div data-role="footer" style="text-align:center;" data-position="fixed" -->
+    </div><!-- div data-role="page" id="photos" -->
+
+
+    <!------------------   PROPAGANDAS   ------------------->
+    <!------------------   PROPAGANDAS   ------------------->
+    <!------------------   PROPAGANDAS   ------------------->
+
+    <div data-role="page" id="propagandas" data-theme="c">
+        <div data-role="header" data-position="fixed" data-theme="a">
+            <h1>Propagandas</h1>
+        </div><!-- div data-role="header" data-position="fixed" -->
+
+        <div data-role="main" class="ui-content" style="text-align:center;">
+            <span style="color:#ff00ff;">Pessoas online: </span><span name="torcedores-online">0</span>
+            <hr>
+            <div id="alerta-propaganda-exibida">Propaganda publicada.</div>
+            <ul data-role="listview" data-inset="true" data-theme="d">
+                <li data-icon="plus">
+                    <a href="#" onclick="sendAd('skol-beats-secret'); return false;">
+                        
+                        <img src="img/skol_beats_secret.jpg">
+                        <h2>Skol Beats Secret</h2>
+                        <p>Exibições: <span id="adsviews-skol-beats-secret">0</span></p>
+                    </a>
+                </li>
+
+                <li data-icon="plus">
+                    <a href="#" onclick="sendAd('skol-beats-spirit'); return false;">
+                        <img src="img/skol_beats_spirit.jpg">
+                        <h2>Skol Beats Spirit</h2>
+                        <p>Exibições: <span id="adsviews-skol-beats-spirit">0</span></p>
+                    </a>
+                </li>
+
+                <li data-icon="plus">
+                    <a href="#" onclick="sendAd('vodka-belvedere'); return false;">
+                        <img src="img/vodka_belvedere.jpg">
+                        <h2>Vodka Belvedere</h2>
+                        <p>Exibições: <span id="adsviews-vodka-belvedere">0</span></p>
+                    </a>
+                </li>
+
+                <li data-icon="plus">
+                    <a href="#" onclick="sendAd('trident'); return false;">
+                        <img src="img/trident.jpg">
+                        <h2>Trident</h2>
+                        <p>Exibições: <span id="adsviews-trident">0</span></p>
+                    </a>
+                </li>
+             </ul>
+</div><!-- div data-role="main" class="ui-content" -->
+
+        <div data-role="footer" style="text-align:center;" data-position="fixed" data-theme="a">
+            <div data-role="controlgroup" data-type="horizontal" data-theme="b">
+                <a href="#home" class="ui-btn ui-corner-all ui-shadow ui-icon-comment ui-btn-icon-notext" onclick="stopShowColor();">home</a>
+                <a href="#marquee" class="ui-btn ui-corner-all ui-shadow ui-icon-info ui-btn-icon-notext" onclick="stopShowColor();">marquee</a>
+                <a href="#propagandas" class="ui-btn ui-corner-all ui-shadow ui-icon-action ui-btn-icon-notext ui-btn-active" onclick="stopShowColor();">ads</a>
+                <a href="#photos" class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-notext">photo</a>    
+                <a href="#colors" class="ui-btn ui-corner-all ui-shadow ui-icon-grid ui-btn-icon-notext">colors</a>
+            </div><!-- div data-role="controlgroup" data-type="horizontal" -->
+        </div><!-- div data-role="footer" style="text-align:center;" data-position="fixed" -->
+    </div><!-- div data-role="page" id="propagandas" -->
+
+    <!----------------   PAINEL DE CORES   ----------------->
+    <!----------------   PAINEL DE CORES   ----------------->
+    <!----------------   PAINEL DE CORES   ----------------->
+
+    <div data-role="page" id="colors" data-theme="c">
+        <div data-role="header" data-position="fixed" data-theme="a">
+            <h1>Controle</h1>
+        </div><!-- div data-role="header" data-position="fixed" -->
+
+        <div data-role="main" class="ui-content" style="text-align:center;">
+            <div id="color-div-dial"></div>
+            <br>
+            <span style="color:#ff00ff;">Pessoas online: </span><span name="torcedores-online">0</span>
+            <br><br><br>
+            <hr>
+
+            <h3>Cores estáticas</h3>
+
+                <br />
+            <div class="ui-grid-c">
+                <div class="ui-block-a">
+                    <div class="color-div" style="background-color:#00ff00;" onclick="showColor('#00ff00', 'static-green');"></div><!-- Green -->
+                </div><!-- div class="ui-block-a" -->
+                <div class="ui-block-b">
+                    <div class="color-div" style="background-color:#ff3399;" onclick="showColor('#ff3399', 'static-pink');"></div><!-- Pink -->
+                </div><!-- div class="ui-block-b" -->
+                <div class="ui-block-c">
+                    <div class="color-div" style="background-color:#0099ff;" onclick="showColor('#0099ff', 'static-blue');"></div><!-- Blue -->
+                </div><!-- div class="ui-block-c" -->
+                <div class="ui-block-d">
+                    <div class="color-div" style="background-color:white;" onclick="showColor('white', 'static-white');"></div><!-- White -->
+                </div><!-- div class="ui-block-d" -->
+            </div><!-- div class="ui-grid-b" -->
+            <br />
+            <hr />
+
+            <h3>Pisca-pisca</h3>
+
+            <!-- GREEN -->
+            <div class="ui-grid-c">
+                <div class="ui-block-a">
+                    <div class="color-div" style="background-color:#00ff00;" onclick="showColor('#00ff00', 'blink-green-1');"><br> 1 </div>
+                </div><!-- div class="ui-block-a" -->
+                <div class="ui-block-b">
+                    <div class="color-div" style="background-color:#00ff00;" onclick="showColor('#00ff00', 'blink-green-2');"><br> 2 </div>
+                </div><!-- div class="ui-block-b" -->
+                <div class="ui-block-c">
+                    <div class="color-div" style="background-color:#00ff00;" onclick="showColor('#00ff00', 'blink-green-3');"><br> 3 </div>
+                </div><!-- div class="ui-block-c" -->
+                <div class="ui-block-d">
+                    <div class="color-div" style="background-color:#00ff00;" onclick="showColor('#00ff00', 'blink-green-4');"><br> 4 </div>
+                </div><!-- div class="ui-block-d" -->
+            </div><!-- div class="ui-grid-c" -->
+
+            <br />
+
+            <!-- PINK -->
+            <div class="ui-grid-c">
+                <div class="ui-block-a">
+                    <div class="color-div" style="background-color:#ff3399;" onclick="showColor('#ff3399', 'blink-pink-1');"><br> 1 </div>
+                </div><!-- div class="ui-block-a" -->
+                <div class="ui-block-b">
+                    <div class="color-div" style="background-color:#ff3399;" onclick="showColor('#ff3399', 'blink-pink-2');"><br> 2 </div>
+                </div><!-- div class="ui-block-b" -->
+                <div class="ui-block-c">
+                    <div class="color-div" style="background-color:#ff3399;" onclick="showColor('#ff3399', 'blink-pink-3');"><br> 3 </div>
+                </div><!-- div class="ui-block-c" -->
+                <div class="ui-block-d">
+                    <div class="color-div" style="background-color:#ff3399;" onclick="showColor('#ff3399', 'blink-pink-4');"><br> 4 </div>
+                </div><!-- div class="ui-block-d" -->
+            </div><!-- div class="ui-grid-c" -->
+
+            <br />
+
+            <!-- BLUE -->
+            <div class="ui-grid-c">
+                <div class="ui-block-a">
+                    <div class="color-div" style="background-color:#0099ff;" onclick="showColor('#0099ff', 'blink-blue-1');"> <br> 1 </div>
+                </div><!-- div class="ui-block-a" -->
+                <div class="ui-block-b">
+                    <div class="color-div" style="background-color:#0099ff;" onclick="showColor('#0099ff', 'blink-blue-2');"><br> 2 </div>
+                </div><!-- div class="ui-block-b" -->
+                <div class="ui-block-c">
+                    <div class="color-div" style="background-color:#0099ff;" onclick="showColor('#0099ff', 'blink-blue-3');"><br> 3 </div>
+                </div><!-- div class="ui-block-c" -->
+                <div class="ui-block-d">
+                    <div class="color-div" style="background-color:#0099ff;" onclick="showColor('#0099ff', 'blink-blue-4');"><br> 4 </div>
+                </div><!-- div class="ui-block-d" -->
+            </div><!-- div class="ui-grid-c" -->
+
+            <br>
+
+            <!-- WHITE -->
+            <div class="ui-grid-c">
+                <div class="ui-block-a">
+                    <div class="color-div" style="background-color:white; color:black;" onclick="showColor('white', 'blink-white-1');"><br> 1 </div>
+                </div><!-- div class="ui-block-a" -->
+                <div class="ui-block-b">
+                    <div class="color-div" style="background-color:white; color:black;" onclick="showColor('white', 'blink-white-2');"><br> 2 </div>
+                </div><!-- div class="ui-block-b" -->
+                <div class="ui-block-c">
+                    <div class="color-div" style="background-color:white; color:black;" onclick="showColor('white', 'blink-white-3');"><br> 3 </div>
+                </div><!-- div class="ui-block-c" -->
+                <div class="ui-block-d">
+                    <div class="color-div" style="background-color:white; color:black;" onclick="showColor('white', 'blink-white-4');"><br> 4 </div>
+                </div><!-- div class="ui-block-d" -->
+            </div><!-- div class="ui-grid-c" -->
+
+            <br />
+
+            <!-- RANDOM COLORS -->
+            <div class="ui-grid-c">
+                <div class="ui-block-a">
+                    <div class="color-div random-colors-buttons" onclick="showColor('#669999', 'blink-random-colors-1');"> <br> 1 </div>
+                </div><!-- div class="ui-block-a" -->
+                <div class="ui-block-b">
+                    <div class="color-div random-colors-buttons" onclick="showColor('#669999', 'blink-random-colors-2');"><br> 2 </div>
+                </div><!-- div class="ui-block-b" -->
+                <div class="ui-block-c">
+                    <div class="color-div random-colors-buttons" onclick="showColor('#669999', 'blink-random-colors-3');"><br> 3 </div>
+                </div><!-- div class="ui-block-c" -->
+                <div class="ui-block-d">
+                    <div class="color-div random-colors-buttons" onclick="showColor('#669999', 'blink-random-colors-4');"><br> 4 </div>
+                </div><!-- div class="ui-block-d" -->
+            </div><!-- div class="ui-grid-c" -->
+
+            <br />
+            <hr />
+            <br />
+
+        </div><!-- div data-role="main" class="ui-content" -->
+
+        <div data-role="footer" style="text-align:center;" data-position="fixed" data-theme="a">
+            <div data-role="controlgroup" data-type="horizontal" data-theme="b">
+                <a href="#home" class="ui-btn ui-corner-all ui-shadow ui-icon-comment ui-btn-icon-notext" onclick="stopShowColor();">home</a>
+                <a href="#marquee" class="ui-btn ui-corner-all ui-shadow ui-icon-info ui-btn-icon-notext" onclick="stopShowColor();">marquee</a>
+                <a href="#propagandas" class="ui-btn ui-corner-all ui-shadow ui-icon-action ui-btn-icon-notext" onclick="stopShowColor();">ads</a>
+                <a href="#photos" class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-notext">photo</a>    
+                <a href="#colors" class="ui-btn ui-corner-all ui-shadow ui-icon-grid ui-btn-icon-notext ui-btn-active" onclick="stopShowColor();">colors</a>
+            </div><!-- div data-role="controlgroup" data-type="horizontal" -->
+        </div><!-- div data-role="footer" style="text-align:center;" data-position="fixed" -->
+    </div><!-- div data-role="page" id="colors" -->
+
+    <!-- Include the PubNub Library -->
+    <script src="pubnub/pubnub.js"></script>
+
+    <!-- Instantiate PubNub -->
+    <script>
+        var pubnub = PUBNUB.init({
+            publish_key: 'pub-c-6170cdf1-6bce-4fbf-aff6-1b8594604a23',
+            subscribe_key: 'sub-c-0f3e9eea-7931-11e6-ab81-02ee2ddab7fe',
+            heartbeat: 60
+        });
+    </script>
+    <script src="js/pubfunctions.js"></script>
+</body>
+</html>
+
